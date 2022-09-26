@@ -1,0 +1,1 @@
+document.getElementById('demo1').innerHTML="This was created with Javascript desde myFile.js";

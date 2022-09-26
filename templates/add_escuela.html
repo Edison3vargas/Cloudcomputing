@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body style="background: rgb(133, 227, 227);">
+<div >
+  {% extends 'base.html' %}
+
+  {% block content %}
+
+  {% for message in get_flashed_messages() %}
+  <div class="alert alert-success">
+    <strong>Succes!</strong>{{ message }}
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  {% endfor %}
+  <h1 style="padding: 1em; margin-left: -2em;">Agregar Carrera</h1>
+  <div style="display: flex; margin-left: -6em;">
+    <br />
+    <form method="POST" class="col-5">
+      {{ form.hidden_tag() }}
+      {{ form.name.label(class="form-label") }}
+      {{ form.name(class="form-control") }}
+      <br />
+      {{ form.duracion.label(class="form-label") }}
+      {{ form.duracion(class="form-control") }}
+      <br />
+      {{ form.submit() }}
+    </form>
+
+    <br />
+    <table class="table table-bordered table table-striped table-dark col-8">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Duracion</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for our_user in our_users %}
+        <tr>
+          <th scope="row">{{ our_user.codigo }}</th>
+          <td>{{ our_user.nombre }}</td>
+          <td>{{ our_user.duracion}}</td>
+          <td>
+            <a class="btn btn-primary" href="{{url_for('update_escuela', codigo=our_user.codigo)}}">Update</a>
+            <a class="btn btn-danger" href="{{url_for('delete_escuela', codigo=our_user.codigo)}}">Delete</a>
+            <br>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+  {% endblock %}
+</div>
+  
+</body>
+
+</html>
